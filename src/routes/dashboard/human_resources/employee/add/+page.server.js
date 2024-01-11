@@ -3,6 +3,27 @@ import { genRD, generateEmail, hasNoNumbers, isValidPhoneNumber, isValidDate, is
 import { sexOptions, civilStatusOptions, highestLevelOfEducationOptions } from '$lib/util/hr/selectOptions.js';
 import { fail } from "@sveltejs/kit";
 
+export async function load() {
+    try {
+
+        let q = {
+            fields: ['Employee.Employee_ID', 'Employee.Employee_FirstName', 'Employee.Employee_LastName'],
+            alias: null,
+            from: 'Employee',
+            where: null,
+            groupBy: null,
+            having: null,
+            orderBy: null
+        }
+
+        return db.get(q);
+    } catch (error) {
+        console.error('Got an Error!!!');
+        console.log(error);
+        return error;
+    }
+}
+
 export const actions = {
     insert: async ({ request }) => {
         try {

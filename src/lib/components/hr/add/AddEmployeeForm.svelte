@@ -3,12 +3,13 @@
 	import PDSFields from '../form_fields/PDSFields.svelte';
 	import { Button } from 'flowbite-svelte';
 
-	export let form;
+	export let form, storedReportsTo;
 </script>
 
 <form method="post" action="?/insert">
 	<EmployeeFields 
 		employee = {form?.employee ?? null} 
+		storedReportsTo = {storedReportsTo}
 		error = {form?.error ?? {}}/>
 	<PDSFields
 		pds={form?.pds ?? null} 

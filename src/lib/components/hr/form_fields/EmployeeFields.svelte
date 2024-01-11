@@ -1,7 +1,7 @@
 <script>
 	import { formatDateForForm } from '$lib/util/hr/utilsHR.js';
 	import { Input, Label } from 'flowbite-svelte';
-	export let employee, error;
+	export let employee, error, storedReportsTo;
 
 	// Default Values
 	let firstName = employee?.Employee_FirstName ?? '';
@@ -45,8 +45,13 @@
 		{/if}
 	</div>
 	<div>
+		<!-- Change this to select input -->
 		<Label for="reports-to" class="mb-2">Reports To:</Label>
-		<Input type="text" name="reports-to" id="reports-to" value={reportsTo} />
+		<select name="reports-to" id="reports-to">
+			{#each storedReportsTo as senpai}
+				<option value={senpai.Employee_ID}>{senpai.Employee_FirstName} {senpai.Employee_LastName}</option>
+			{/each}
+		</select>
 
 		{#if error['reports-to']}
 			<span style="color:red;">{error['reports-to']}</span>
